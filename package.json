@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "journal": "node scripts/journal.js"
   },
   "dependencies": {
     "@portabletext/react": "^4.0.3",

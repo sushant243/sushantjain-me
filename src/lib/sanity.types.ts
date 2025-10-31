@@ -55,6 +55,18 @@ export interface Journal extends SanityDocument {
   author?: Author
   publishedAt?: string
   seoDescription?: string
+  dayNumber?: number
+  stats?: {
+    marketing?: number
+    building?: number
+    conversationsTotal?: number
+    conversationsQualified?: number
+    conversationsGhost?: number
+    conversationsWrongFit?: number
+    goalProgress?: number
+    runwayCurrent?: number
+    runwayTotal?: number
+  }
 }
 
 export interface Essay extends SanityDocument {

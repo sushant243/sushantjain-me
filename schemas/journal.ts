@@ -82,6 +82,67 @@ export const journal = defineType({
       rows: 2,
       description: 'Description for search engines',
     }),
+    defineField({
+      name: 'dayNumber',
+      title: 'Day #',
+      type: 'number',
+      description: 'Sequential day number (e.g., Day 12)',
+    }),
+    defineField({
+      name: 'stats',
+      title: 'Current State Stats',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'marketing',
+          title: 'Marketing %',
+          type: 'number',
+          validation: (Rule) => Rule.min(0).max(100),
+        }),
+        defineField({
+          name: 'building',
+          title: 'Building %',
+          type: 'number',
+          validation: (Rule) => Rule.min(0).max(100),
+        }),
+        defineField({
+          name: 'conversationsTotal',
+          title: 'Conversations This Week (Total)',
+          type: 'number',
+        }),
+        defineField({
+          name: 'conversationsQualified',
+          title: 'Qualified',
+          type: 'number',
+        }),
+        defineField({
+          name: 'conversationsGhost',
+          title: 'Ghost',
+          type: 'number',
+        }),
+        defineField({
+          name: 'conversationsWrongFit',
+          title: 'Wrong Fit',
+          type: 'number',
+        }),
+        defineField({
+          name: 'goalProgress',
+          title: 'Goal Progress %',
+          type: 'number',
+          validation: (Rule) => Rule.min(0).max(100),
+        }),
+        defineField({
+          name: 'runwayCurrent',
+          title: 'Runway (Current Month)',
+          type: 'number',
+        }),
+        defineField({
+          name: 'runwayTotal',
+          title: 'Runway (Total Months)',
+          type: 'number',
+        }),
+      ],
+    }),
   ],
   preview: {
     select: {
