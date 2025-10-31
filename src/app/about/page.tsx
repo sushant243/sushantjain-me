@@ -1,147 +1,210 @@
 import Container from '@/components/Container'
-import Link from 'next/link'
-import { Twitter, Linkedin, Mail } from 'lucide-react'
+import EmailCaptureForm from '@/components/EmailCaptureForm'
+import Image from 'next/image'
 
 export default function AboutPage() {
   return (
-    <Container className="py-12">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6">About Sushant Jain</h1>
+    <Container className="py-36">
+      <div className="max-w-5xl mx-auto space-y-28">
+        {/* Opening Hook */}
+        <div className="space-y-8">
+          <h2 className="text-3xl lg:text-4xl font-bold text-brand-text-primary">
+            I've Been Trying to Crack This for{' '}
+            <span className="inline-block relative">
+              14 Years
+              <div className="absolute left-0 -bottom-1 w-full h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+            </span>
+            . Now I'm All In.
+          </h2>
 
-        <div className="prose prose-lg dark:prose-invert max-w-none">
-          <p className="text-xl leading-relaxed mb-8">
-            I&apos;m a founder, engineer, and writer passionate about building products that make
-            a difference. Currently, I&apos;m building{' '}
-            <a
-              href="https://lessgo.ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-700"
-            >
-              Lessgo.ai
-            </a>
-            , helping teams ship software faster and better.
-          </p>
-
-          <h2>My Journey</h2>
-          <p>
-            My journey in technology began with a fascination for how things work. From writing
-            my first line of code to building products used by thousands, it&apos;s been an incredible
-            adventure of continuous learning and growth.
-          </p>
-          <p>
-            I believe in the power of technology to transform lives and businesses. Through my
-            work, I aim to make complex technology accessible and useful for everyone.
-          </p>
-
-          <h2>What I Do</h2>
-          <ul>
-            <li>
-              <strong>Building Startups:</strong> Currently focused on Lessgo.ai, my latest venture
-              in the developer tools space.
-            </li>
-            <li>
-              <strong>Writing:</strong> I write about technology, startups, philosophy, and life.
-              I also write poetry and short stories in Hindi and Urdu.
-            </li>
-            <li>
-              <strong>Teaching:</strong> I create courses and content to help others on their
-              journey in tech and life.
-            </li>
-            <li>
-              <strong>Open Source:</strong> Contributing to and maintaining open source projects
-              that help the developer community.
-            </li>
-          </ul>
-
-          <h2>My Interests</h2>
-          <p>
-            Beyond technology, I&apos;m deeply interested in:
-          </p>
-          <ul>
-            <li>Philosophy and ethics in technology</li>
-            <li>Hindi and Urdu literature - especially ghazals and poetry</li>
-            <li>History of computing and technological innovation</li>
-            <li>Personal development and productivity</li>
-            <li>Building communities and helping others grow</li>
-          </ul>
-
-          <h2>My Writing</h2>
-          <p>
-            I write across multiple genres and languages:
-          </p>
-          <ul>
-            <li>
-              <Link href="/essays" className="text-blue-600 hover:text-blue-700">
-                Technical essays
-              </Link>{' '}
-              on software, startups, and innovation
-            </li>
-            <li>
-              <Link href="/journal" className="text-blue-600 hover:text-blue-700">
-                Public journal
-              </Link>{' '}
-              documenting my build-in-public journey
-            </li>
-            <li>
-              <Link href="/poetry" className="text-blue-600 hover:text-blue-700">
-                Poetry and ghazals
-              </Link>{' '}
-              in Hindi and Urdu
-            </li>
-            <li>
-              <Link href="/stories" className="text-blue-600 hover:text-blue-700">
-                Short stories
-              </Link>{' '}
-              exploring human experiences
-            </li>
-          </ul>
-
-          <h2>Connect With Me</h2>
-          <p>
-            I love connecting with fellow builders, writers, and thinkers. Feel free to reach out:
-          </p>
-
-          <div className="flex gap-6 my-8 not-prose">
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-colors"
-            >
-              <Twitter className="w-5 h-5" />
-              <span>Twitter</span>
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-gray-600 hover:text-blue-700 transition-colors"
-            >
-              <Linkedin className="w-5 h-5" />
-              <span>LinkedIn</span>
-            </a>
-            <a
-              href="mailto:hello@sushantjain.com"
-              className="flex items-center gap-2 text-gray-600 hover:text-green-600 transition-colors"
-            >
-              <Mail className="w-5 h-5" />
-              <span>Email</span>
-            </a>
-          </div>
-
-          <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6 my-8 not-prose">
-            <h3 className="text-lg font-semibold mb-2">Stay Updated</h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Subscribe to my newsletter for updates on new posts, projects, and insights.
+          <div className="flex items-center gap-3 pt-8">
+            <Image
+              src="/founder_v1.jpg"
+              alt="Sushant Jain"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+            <p className="text-xl leading-relaxed text-brand-text-primary">
+              Hey, I'm Sushant Jain.
             </p>
-            <Link
-              href="/subscribe"
-              className="inline-block px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-            >
-              Subscribe to Newsletter
-            </Link>
           </div>
+
+          <p className="text-lg leading-relaxed text-brand-text-primary">
+            For 14 years, I had a comfortable tech career:
+          </p>
+
+          {/* Timeline */}
+          <div className="relative pl-8 space-y-6">
+            {/* Vertical line */}
+            <div className="absolute left-2 top-2 bottom-2 w-0.5 bg-gray-200"></div>
+
+            {/* Timeline items */}
+            <div className="relative flex gap-4 items-start">
+              <div className="absolute -left-6 w-3 h-3 bg-brand-coral rounded-full"></div>
+              <p className="text-lg text-brand-text-primary">
+                <span className="font-semibold">First 7 years:</span> Software developer
+              </p>
+            </div>
+
+            <div className="relative flex gap-4 items-start">
+              <div className="absolute -left-6 w-3 h-3 bg-brand-coral rounded-full"></div>
+              <p className="text-lg text-brand-text-primary">
+                <span className="font-semibold">Last 7 years:</span> B2B sales (closed €600M+ in enterprise deals)
+              </p>
+            </div>
+
+            <div className="relative flex gap-4 items-start">
+              <div className="absolute -left-6 w-3 h-3 bg-gray-300 rounded-full"></div>
+              <p className="text-lg text-brand-text-primary">
+                <span className="font-semibold">Whole time:</span> Building on the side
+              </p>
+            </div>
+
+            <div className="relative flex gap-4 items-start">
+              <div className="absolute -left-6 w-3 h-3 bg-brand-coral rounded-full ring-4 ring-brand-coral/20"></div>
+              <p className="text-lg text-brand-text-primary font-semibold">
+                April 2025: Quit with 18 months runway
+              </p>
+            </div>
+          </div>
+
+          <p className="text-lg leading-relaxed text-brand-text-primary pt-12">
+            I kept trying different side projects: Internet marketing projects. Ecommerce stores. Startups. Side hustles. Some made a little money. Most went nowhere.
+          </p>
+
+          <p className="text-lg leading-relaxed text-brand-text-primary">
+            I kept thinking: <em>"If I just had more time... if I could just focus full-time... then I'd figure it out."</em>
+          </p>
+
+          <p className="text-xl font-bold leading-relaxed text-brand-text-primary pt-4">
+            Now I have no excuses. Just one question:
+          </p>
+
+          <p className="text-lg leading-relaxed text-brand-text-primary">
+            <span style={{background: 'linear-gradient(transparent 60%, rgba(255, 193, 7, 0.3) 40%)'}}>
+              Can 14 years of dev, sales, and failed side projects finally add up to one profitable B2B SaaS?
+            </span>
+          </p>
+        </div>
+
+        {/* Divider */}
+        <div className="w-full border-t border-gray-200/40"></div>
+
+        {/* The Hypothesis */}
+        <div className="space-y-8">
+          <h2 className="text-3xl lg:text-4xl font-bold text-brand-text-primary">
+            The Hypothesis I'm Testing
+          </h2>
+
+          <p className="text-lg leading-relaxed text-brand-text-primary pt-8">
+            After 14 years of trying, I've noticed something:
+          </p>
+
+          <p className="text-lg leading-relaxed text-brand-text-primary">
+            Most projects fail because founders fail to market. Some because of lack of knowledge, some because of lack of interest.
+          </p>
+
+          <p className="text-lg leading-relaxed text-brand-text-primary">
+            And there is a lot of misinformation in the "marketing first" approach. Most people think it means posting on Twitter and getting waitlist signups. That's not marketing. That's content.
+          </p>
+
+          <p className="text-lg leading-relaxed text-brand-text-primary">
+            I've closed €600M+ in B2B sales. Real marketing means finding people already paying for bad solutions and confirming they'll switch to yours.
+          </p>
+
+          <p className="text-lg font-bold leading-relaxed text-brand-text-primary">
+            <span style={{background: 'linear-gradient(transparent 60%, rgba(255, 193, 7, 0.3) 40%)'}}>
+              I'm testing a systematic approach to go from early adopters to enterprise customers
+            </span>... the kind of path that actually works when you're bootstrapping B2B SaaS.
+          </p>
+
+          <p className="text-lg leading-relaxed text-brand-text-primary">
+            And I'm documenting every step.
+          </p>
+        </div>
+
+        {/* Divider */}
+        <div className="w-full border-t border-gray-200/40"></div>
+
+        {/* For You / Not For You */}
+        <div className="space-y-8">
+          <h2 className="text-3xl lg:text-4xl font-bold text-brand-text-primary pb-12">
+            Who This Is For
+          </h2>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="bg-orange-100/50 rounded-lg p-8 border-l-4 border-brand-coral shadow-sm space-y-4">
+              <h3 className="text-xl font-bold text-brand-text-primary">This Is For You If:</h3>
+              <ul className="space-y-4 text-lg text-brand-text-primary">
+                <li>✓ You've tried building things before (maybe they didn't work out)</li>
+                <li>✓ You're building now or about to start</li>
+                <li>✓ You want to learn the real marketing-first approach, not "build and pray"</li>
+                <li>✓ You value watching someone with real experience figure this out in real-time</li>
+              </ul>
+            </div>
+
+            <div className="rounded-lg p-8 border-l-4 border-gray-300 shadow-sm space-y-4">
+              <h3 className="text-xl font-bold text-brand-text-primary">This Is NOT For You If:</h3>
+              <ul className="space-y-4 text-lg text-brand-text-primary">
+                <li>✗ You need a proven step-by-step system (I'm testing one, not teaching one... yet)</li>
+                <li>✗ You want only highlight reels (you'll see the failures too)</li>
+                <li>✗ You're already past $10K MRR (you're ahead of where I am)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="w-full border-t border-gray-200/40"></div>
+
+        {/* What You'll Get */}
+        <div className="space-y-6">
+          <h2 className="text-3xl lg:text-4xl font-bold text-brand-text-primary pb-8">
+            What You'll Get
+          </h2>
+
+          <p className="text-lg leading-relaxed text-brand-text-primary">
+            One email every Thursday. 5-minute read.
+          </p>
+
+          <p className="text-lg leading-relaxed text-brand-text-primary">
+            Real experiments. Real conversations with customers. Real results (good and bad).
+          </p>
+
+          <p className="text-lg font-bold leading-relaxed text-brand-text-primary">
+            Recent topics:
+          </p>
+
+          <ul className="list-disc list-outside ml-6 space-y-2 text-lg text-brand-text-primary">
+            <li>"How I got 72 waitlist signups before writing code"</li>
+            <li>"Why I'm building case studies at $0 MRR"</li>
+            <li>"What 7 years of closing enterprise deals taught me about early-stage positioning"</li>
+            <li>"The side project mistakes I made for 14 years (and what I'm doing differently now)"</li>
+          </ul>
+
+          <p className="text-lg leading-relaxed text-brand-text-primary">
+            This isn't a course. It's field notes from someone who's been in the trenches for 14 years, finally going all-in.
+          </p>
+
+          <p className="text-xl font-bold leading-relaxed text-brand-text-primary">
+            If you're tired of building in the dark, join me. Let's test, learn, and grow... one real experiment at a time.
+          </p>
+        </div>
+
+        
+
+        {/* Email Signup */}
+        <div >
+          <EmailCaptureForm />
+          
+        </div>
+
+        {/* P.S. Section */}
+        <div className="border-t border-brand-text-secondary/20 pt-16">
+          <p className="text-lg leading-relaxed text-brand-text-primary">
+            <strong>P.S.</strong> After 14 years of side projects and a corporate career, I quit in April 2025 with 18 months of runway. If this works, I'll have cracked what I've been chasing for over a decade. If it doesn't, you'll learn what NOT to do. Either way, you get the real story.
+          </p>
         </div>
       </div>
     </Container>

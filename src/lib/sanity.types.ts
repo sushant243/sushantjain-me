@@ -110,6 +110,21 @@ export interface Story extends SanityDocument {
   seoDescription?: string
 }
 
+export interface Podcast extends SanityDocument {
+  _type: 'podcast'
+  title: string
+  slug: Slug
+  date: string
+  tags?: string[]
+  excerpt?: string
+  videoUrl?: string
+  coverImage?: Image
+  duration?: string
+  author?: Author
+  publishedAt?: string
+  seoDescription?: string
+}
+
 export interface SiteSettings extends SanityDocument {
   _type: 'siteSettings'
   title: string

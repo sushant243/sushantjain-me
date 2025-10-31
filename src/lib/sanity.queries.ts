@@ -146,10 +146,48 @@ export const storyBySlugQuery = groq`
   }
 `
 
+// Podcast Queries
+export const podcastsQuery = groq`
+  *[_type == "podcast" && defined(publishedAt)] | order(date desc) {
+    _id,
+    title,
+    slug,
+    date,
+    tags,
+    excerpt,
+    videoUrl,
+    coverImage,
+    duration,
+    publishedAt,
+    "author": author->name
+  }
+`
+
+export const podcastBySlugQuery = groq`
+  *[_type == "podcast" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    date,
+    tags,
+    excerpt,
+    videoUrl,
+    coverImage,
+    duration,
+    publishedAt,
+    seoDescription,
+    "author": author->{
+      name,
+      image,
+      bio
+    }
+  }
+`
+
 // Latest content for homepage
 export const latestContentQuery = groq`
 {
-  "journals": *[_type == "journal" && defined(publishedAt)] | order(date desc)[0...3] {
+  "journals": *[_type == "journal" && defined(publishedAt)] | order(date desc)[0...4] {
     _id,
     _type,
     title,
@@ -158,7 +196,7 @@ export const latestContentQuery = groq`
     excerpt,
     "author": author->name
   },
-  "essays": *[_type == "essay" && defined(publishedAt)] | order(date desc)[0...3] {
+  "essays": *[_type == "essay" && defined(publishedAt)] | order(date desc)[0...4] {
     _id,
     _type,
     title,
@@ -166,6 +204,18 @@ export const latestContentQuery = groq`
     date,
     excerpt,
     coverImage,
+    "author": author->name
+  },
+  "podcasts": *[_type == "podcast" && defined(publishedAt)] | order(date desc)[0...4] {
+    _id,
+    _type,
+    title,
+    slug,
+    date,
+    excerpt,
+    videoUrl,
+    coverImage,
+    duration,
     "author": author->name
   },
   "poems": *[_type == "poem" && defined(publishedAt)] | order(date desc)[0...3] {

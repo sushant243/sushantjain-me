@@ -7,8 +7,28 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    'bg-gradient-to-r',
+    'from-transparent',
+    'via-brand-text-secondary/20',
+    'to-transparent',
+  ],
   theme: {
     extend: {
+      colors: {
+        brand: {
+          cream: '#FCFCFC',
+          beige: '#F5EFE7',
+          'beige-dark': '#EDE4D8',
+          coral: '#FF9B7D',
+          'coral-dark': '#FF7A54',
+          'text-primary': '#1A1A1A',
+          'text-secondary': '#4A4A4A',
+        },
+      },
+      fontSize: {
+        '5.5xl': '3.5rem',
+      },
       fontFamily: {
         sans: ['var(--font-geist-sans)'],
         mono: ['var(--font-geist-mono)'],

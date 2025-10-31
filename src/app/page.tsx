@@ -1,16 +1,34 @@
 import Container from '@/components/Container'
 import Hero from '@/components/Hero'
-import ExploreGrid from '@/components/ExploreGrid'
+import ContentCardGrid from '@/components/ContentCardGrid'
+import EarlierBuilds from '@/components/EarlierBuilds'
+import ArtAndWords from '@/components/ArtAndWords'
+import { client } from '@/lib/sanity.client'
+import { latestContentQuery } from '@/lib/sanity.queries'
+import type { Journal, Podcast, Essay } from '@/lib/sanity.types'
 
-export default function Home() {
+async function getLatestContent() {
+  const content = await client.fetch<{
+    journals: Journal[]
+    podcasts: Podcast[]
+    essays: Essay[]
+  }>(latestContentQuery)
+  return content
+}
+
+export default async function Home() {
+  const { journals, podcasts, essays } = await getLatestContent()
+
   return (
     <Container className="py-8">
       <Hero />
-
-      <section className="mt-12 sm:mt-16">
-        <h2 className="text-2xl font-bold mb-8">Explore</h2>
-        <ExploreGrid />
-      </section>
+      <ContentCardGrid
+        journals={journals}
+        podcasts={podcasts}
+        essays={essays}
+      />
+      <EarlierBuilds />
+      <ArtAndWords />
     </Container>
   )
 }

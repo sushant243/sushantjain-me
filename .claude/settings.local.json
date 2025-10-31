@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(del \"C:\\Users\\susha\\sushantjain\\velite.config.ts\")"
     ],
     "deny": [],
     "ask": []

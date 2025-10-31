@@ -3,21 +3,24 @@
 
 ### 0) One-liner
 
-A fast, writer-friendly personal site for Sushant Jain — featuring Journal, Essays, Poetry & Short Stories, with optional videos/books — , deployed on Vercel.
+Personal brand site for Sushant Jain positioning him as a SaaS marketing authority in progress — featuring Field Notes, Essays, Podcast, Poetry & Short Stories — deployed on Vercel.
 
 ---
 
 ### 1) Goals
 
-* Publish easily (MDX files) for Journal, Essays, Poetry (Hindi/Urdu), Short Stories.
-* Clean reading UX, SEO-friendly, RSS, newsletter.
-* Free/low-cost hosting (Vercel Hobby).
+* Position as focused SaaS marketing authority learning/building in public (2025 narrative)
+* Publish easily (MDX files) for Journal, Essays, Poetry, Short Stories
+* Email capture for weekly Field Notes newsletter
+* Clean reading UX, SEO-friendly, RSS
+* Free/low-cost hosting (Vercel Hobby)
 
 ---
 
 ### 2) Audience
 
-Founders, creators, readers of tech history/philosophy, lovers of Hindi/Urdu literature.
+**Primary**: SaaS founders, marketers learning growth/marketing craft
+**Secondary**: Builders, creators, readers of philosophy/poetry
 
 ---
 
@@ -25,47 +28,71 @@ Founders, creators, readers of tech history/philosophy, lovers of Hindi/Urdu lit
 
 ```
 Home
-Start Here
-Journal
-Essays
-Poetry
-Short Stories
-Academy (video lessons – later)
+Journal (Public Journal — build in public field notes)
+Essays (Essays and posts — longer SaaS marketing breakdowns)
+Podcast (Marketing Insights — short SaaS growth videos)
 About
-Subscribe
+Poetry (Ghazals & poems)
+Short Stories
+Subscribe to newsletter (header CTA + inline forms)
 ```
+
+**Note**: Start Here section removed. Homepage hero serves as introduction.
 
 ---
 
 ### 4) Homepage Layout
 
 **Header**
+* Logo/Name: "Sushant Jain" (top left)
+* Nav: Journal · Essays · Podcast · About
+* CTA: "Subscribe to newsletter" (top right)
 
-nav: Subscribe to new posts · About me. Free video course · My Book
+**Hero Section**
+* H1: "Field Notes from a Builder Learning Marketing"
+* Bio introduction:
+  - "Hey, I'm **Sushant Jain** - founder of **Lessgo.ai**"
+  - 14 years building, 7 years dev, 7 years B2B sales
+  - Handful of side ventures (life coaching, ecommerce, internet marketing)
+  - Never went all-in on own product until now
+* Narrative:
+  - "Lessgo.ai is my first full-time bet. Treating marketing like a reporter on assignment"
+  - "These are my field notes from the journey — **the experiments, frameworks, wins, and flops**"
+  - "If you're building something that matters and figuring out how to get it in front of people, come along for the ride."
+* **Email capture**: Rounded input field + coral "Subscribe" button
+* Subtext: "Get weekly Field Notes + Short, honest lessons from marketing Lessgo.ai in public."
 
+**SaaS Marketing Field Notes Section**
+* Heading: "SaaS Marketing Field Notes"
+* Subheading: "Marketing isn't theory. It's a daily craft. Every day, I document what I'm learning while growing Lessgo.ai: what I'm testing, studying, and refining."
+* 3-column card grid:
+  1. **Public Journal** - Daily reflections, experiments, honest lessons from building (no polish, just real progress)
+  2. **Marketing Insights podcast** - Short podcast-style videos breaking down real SaaS growth experiments and insights
+  3. **Essays and posts** - Longer breakdowns: book notes, expert interviews, field-tested SaaS marketing frameworks
 
-**Hero**
+**Earlier Builds Section**
+* Heading: "Earlier Builds (and the Lessons They Left Behind)"
+* Intro: "Before Lessgo.ai, I built many things: life-coaching academy, ecommerce stores, online ventures. Most didn't scale. Some never launched. But each one taught me something about how ideas succeed (or don't)."
+* Projects listed:
+  - **Life Mastery Academy** (🎓) - 10-part, 5-hour video course created years ago but never released. Not for lack of value, but because didn't understand marketing yet. (Early attempt at teaching transformation.)
+    - Link: → [Watch Life Mastery Academy]
+  - **Transform Your Career** (📘) - Ebook people loved, but used as lead magnet for something unrelated. Taught what happens when messaging and product don't align. Those early builds shaped current obsession: mastering the craft of marketing.
+    - Link: → [Read Transform Your Career]
 
-* H1: “Welcome, friend”
-* Paragraph:
+**Art & Words Section**
+* Heading: "Art & Words"
+* Intro: "Beyond marketing and building, I write."
+* Content:
+  - "Seventy ghazals. A few short stories. Occasional essays on philosophy and growth."
+  - "The same curiosity that drives my marketing fuels my writing: the search for rhythm, emotion, and truth. Marketing is storytelling with an outcome."
+  - "Poetry is storytelling without one."
+  - "Both demand care — for language, and for people."
+* Links: → [Read Ghazals] | [Short Stories]
 
-  > I’m Sushant Jain (link with about me page) and this is my home on the internet.
-  > These days, I’m building a startup called Lessgo.ai (link to lessgo.ai)
-
-
-**Explore grid** (cards)
-
-1. Start Here → overview of the site /start-here
-2. Video Course: Life Mastery with Sushant Jain /video-course
-3. Free book: *Transform Your Career* → download /TYC-book
-4. Poetry (Ghazals & Poems in Hindi) → /poetry
-5. Short Stories in Hindi → /stories
-6. Public Journal (build in public) → /journal
-7. All Essays & Posts → /blog
+**Footer CTA**
+* "I'm building Lessgo.ai, learning marketing in public, and leaving field notes along the way. Join the ride."
 
 **Footer**
-
-* Newsletter signup (if not shown higher)
 * Social links (Twitter, LinkedIn, YouTube)
 * Copyright
 
@@ -73,15 +100,16 @@ nav: Subscribe to new posts · About me. Free video course · My Book
 
 ### 5) Page Templates
 
-* Home (above)
-* Start Here (welcome + cornerstone posts)
-* Journal index + post
-* Essays index + post
-* Poetry index + poem
-* Short Stories index + story
-* Academy (YouTube playlist embeds)
+* Home (above — storytelling-driven homepage)
+* Journal index + post (build in public field notes)
+* Essays index + post (long-form SaaS marketing content)
+* Podcast index + video embeds (short SaaS growth videos)
+* Poetry index + poem (ghazals, Hindi/Urdu)
+* Short Stories index + story (Hindi stories)
+* Life Mastery Academy (legacy video course archive)
+* Transform Your Career (ebook/lead magnet page)
 * About
-* Subscribe
+* Subscribe (standalone newsletter signup)
 
 ---
 
@@ -93,16 +121,18 @@ nav: Subscribe to new posts · About me. Free video course · My Book
 
 ### 7) Components
 
-| Component       | Description                |
-| --------------- | -------------------------- |
-| `Header`        | Sticky top nav             |
-| `Hero`          | Greeting + intro           |
-| `ExploreGrid`   | 2–3 column card grid       |
-| `PostList`      | for section indexes        |
-| `Prose`         | default MDX renderer       |
-| `Poem`          | stanza-friendly typography |
-| `SubscribeForm` | ConvertKit embed           |
-| `Footer`        | social + copyright         |
+| Component            | Description                                       |
+| -------------------- | ------------------------------------------------- |
+| `Header`             | Nav with "Subscribe to newsletter" CTA            |
+| `Hero`               | Storytelling hero with headline + bio + email CTA |
+| `EmailCaptureForm`   | Rounded input + coral Subscribe button            |
+| `ContentCardGrid`    | 3-column card grid (Journal, Podcast, Essays)     |
+| `ProjectCard`        | Earlier builds project cards                      |
+| `PostList`           | Section indexes                                   |
+| `Prose`              | Default MDX renderer                              |
+| `Poem`               | Stanza-friendly typography (Hindi/Urdu)           |
+| `SubscribeForm`      | ConvertKit embed                                  |
+| `Footer`             | Footer CTA + social links + copyright             |
 
 ---
 
@@ -115,25 +145,28 @@ nav: Subscribe to new posts · About me. Free video course · My Book
 
 ### 9) Tech Stack
 
-Next.js 14 + TS, Tailwind, MDX, Contentlayer/Velite, @vercel/og, ConvertKit.
+Next.js 15.5.3 + TS, Tailwind CSS v4, Turbopack, MDX, Contentlayer/Velite, @vercel/og, ConvertKit.
 
 ---
 
 ### 10) Routing & Files
 
 ```
-/app/page.tsx                # Home
-/app/start-here/page.tsx
+/app/page.tsx                       # Home (storytelling-driven)
 /app/about/page.tsx
 /app/subscribe/page.tsx
-/app/journal/page.tsx
+/app/journal/page.tsx               # Public Journal index
 /app/journal/[slug]/page.tsx
-/app/essays/page.tsx
+/app/essays/page.tsx                # Essays index
 /app/essays/[slug]/page.tsx
-/app/poetry/page.tsx
+/app/podcast/page.tsx               # Podcast/video index
+/app/podcast/[slug]/page.tsx
+/app/poetry/page.tsx                # Poetry index
 /app/poetry/[slug]/page.tsx
-/app/stories/page.tsx
+/app/stories/page.tsx               # Short stories index
 /app/stories/[slug]/page.tsx
+/app/life-mastery-academy/page.tsx  # Legacy video course
+/app/transform-your-career/page.tsx # Legacy ebook
 /rss.xml/route.ts
 /sitemap.xml/route.ts
 ```
