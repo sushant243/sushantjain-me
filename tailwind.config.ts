@@ -7,12 +7,6 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  safelist: [
-    'bg-gradient-to-r',
-    'from-transparent',
-    'via-brand-text-secondary/20',
-    'to-transparent',
-  ],
   theme: {
     extend: {
       colors: {

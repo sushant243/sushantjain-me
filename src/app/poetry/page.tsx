@@ -90,7 +90,7 @@ export default async function PoetryPage() {
                     {format(new Date(poem.date), 'MMMM d, yyyy')}
                   </time>
                   {poem.author && (
-                    <span className="ml-2">• {poem.author}</span>
+                    <span className="ml-2">• {poem.author.name}</span>
                   )}
                 </div>
               </Link>

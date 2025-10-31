@@ -77,7 +77,7 @@ export default async function StoriesPage() {
                   )}
                   {story.author && (
                     <span className="text-gray-600 dark:text-gray-400">
-                      by {story.author}
+                      by {story.author.name}
                     </span>
                   )}
                 </div>

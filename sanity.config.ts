@@ -60,9 +60,4 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
-
-  studio: {
-    // Custom studio branding
-    title: 'Sushant Jain Admin',
-  },
 })

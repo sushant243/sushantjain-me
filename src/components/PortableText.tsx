@@ -1,11 +1,26 @@
 import { PortableText as PortableTextReact } from '@portabletext/react'
 import type { PortableTextBlock } from '@portabletext/types'
+import type { ReactNode } from 'react'
 import Image from 'next/image'
 import { urlFor } from '@/lib/sanity.client'
 
+interface ImageValue {
+  asset?: {
+    _ref: string
+  }
+  alt?: string
+  caption?: string
+}
+
+interface CodeValue {
+  code: string
+  language?: string
+  filename?: string
+}
+
 const components = {
   types: {
-    image: ({ value }: any) => {
+    image: ({ value }: { value: ImageValue }) => {
       if (!value?.asset?._ref) {
         return null
       }
@@ -26,7 +41,7 @@ const components = {
         </figure>
       )
     },
-    code: ({ value }: any) => {
+    code: ({ value }: { value: CodeValue }) => {
       return (
         <div className="my-6">
           {value.filename && (
@@ -44,7 +59,7 @@ const components = {
     },
   },
   marks: {
-    link: ({ value, children }: any) => {
+    link: ({ value, children }: { value?: { href: string }, children?: ReactNode }) => {
       const target = value?.href?.startsWith('http') ? '_blank' : undefined
       const rel = target === '_blank' ? 'noopener noreferrer' : undefined
       return (
@@ -55,22 +70,22 @@ const components = {
     },
   },
   block: {
-    h1: ({ children }: any) => <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>,
-    h2: ({ children }: any) => <h2 className="text-2xl font-bold mt-6 mb-3">{children}</h2>,
-    h3: ({ children }: any) => <h3 className="text-xl font-bold mt-4 mb-2">{children}</h3>,
-    h4: ({ children }: any) => <h4 className="text-lg font-bold mt-3 mb-2">{children}</h4>,
-    blockquote: ({ children }: any) => (
+    h1: ({ children }: { children?: ReactNode }) => <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>,
+    h2: ({ children }: { children?: ReactNode }) => <h2 className="text-2xl font-bold mt-6 mb-3">{children}</h2>,
+    h3: ({ children }: { children?: ReactNode }) => <h3 className="text-xl font-bold mt-4 mb-2">{children}</h3>,
+    h4: ({ children }: { children?: ReactNode }) => <h4 className="text-lg font-bold mt-3 mb-2">{children}</h4>,
+    blockquote: ({ children }: { children?: ReactNode }) => (
       <blockquote className="border-l-4 border-gray-300 pl-4 my-4 italic">{children}</blockquote>
     ),
-    normal: ({ children }: any) => <p className="mb-4">{children}</p>,
+    normal: ({ children }: { children?: ReactNode }) => <p className="mb-4">{children}</p>,
   },
   list: {
-    bullet: ({ children }: any) => <ul className="list-disc pl-6 mb-4">{children}</ul>,
-    number: ({ children }: any) => <ol className="list-decimal pl-6 mb-4">{children}</ol>,
+    bullet: ({ children }: { children?: ReactNode }) => <ul className="list-disc pl-6 mb-4">{children}</ul>,
+    number: ({ children }: { children?: ReactNode }) => <ol className="list-decimal pl-6 mb-4">{children}</ol>,
   },
   listItem: {
-    bullet: ({ children }: any) => <li className="mb-1">{children}</li>,
-    number: ({ children }: any) => <li className="mb-1">{children}</li>,
+    bullet: ({ children }: { children?: ReactNode }) => <li className="mb-1">{children}</li>,
+    number: ({ children }: { children?: ReactNode }) => <li className="mb-1">{children}</li>,
   },
 }
 

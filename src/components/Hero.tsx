@@ -56,7 +56,7 @@ export default function Hero() {
         </p>
 
         <p className="text-lg leading-relaxed">
-          Lessgo.ai is my first full-time bet. And this time, I'm applying 14 years of side projects and €600M in B2B sales experience - documenting every step as I grow Lessgo.ai from early adopters to enterprise customers.
+          Lessgo.ai is my first full-time bet. And this time, I&apos;m applying 14 years of side projects and €600M in B2B sales experience - documenting every step as I grow Lessgo.ai from early adopters to enterprise customers.
         </p>
 
         <p className="text-2xl leading-relaxed">

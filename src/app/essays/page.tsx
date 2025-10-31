@@ -28,7 +28,7 @@ export default async function EssaysPage() {
         {/* Featured Essay */}
         {essays.slice(0, 1).map((essay) => (
           <div
-            key={essay.slug}
+            key={essay.slug.current}
             className="mb-12 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg border border-blue-200 dark:border-blue-800"
           >
             <div className="mb-2 text-sm font-medium text-blue-600">Featured Essay</div>
@@ -43,7 +43,7 @@ export default async function EssaysPage() {
                 </span>
                 {essay.author && (
                   <span className="text-gray-600 dark:text-gray-400">
-                    by {essay.author}
+                    by {essay.author.name}
                   </span>
                 )}
               </div>
@@ -85,7 +85,7 @@ export default async function EssaysPage() {
                   </span>
                   {essay.author && (
                     <span className="text-gray-600 dark:text-gray-400">
-                      by {essay.author}
+                      by {essay.author.name}
                     </span>
                   )}
                 </div>
