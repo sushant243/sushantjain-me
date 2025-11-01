@@ -12,7 +12,7 @@ import type { ReactNode } from 'react'
 const poetryComponents = {
   block: {
     normal: ({ children }: { children?: ReactNode }) => (
-      <p className="whitespace-pre-line leading-loose my-4">
+      <p className="whitespace-pre-line leading-loose my-6">
         {children}
       </p>
     ),
