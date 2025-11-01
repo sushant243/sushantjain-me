@@ -7,6 +7,15 @@ import { client } from '@/lib/sanity.client'
 import { poemBySlugQuery } from '@/lib/sanity.queries'
 import type { Poem } from '@/lib/sanity.types'
 import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
+
+const poetryComponents = {
+  block: {
+    normal: ({ children }: { children?: ReactNode }) => (
+      <p className="mb-6 whitespace-pre-line leading-relaxed">{children}</p>
+    ),
+  },
+}
 
 interface PoemPageProps {
   params: Promise<{ slug: string }>
@@ -114,7 +123,7 @@ export default async function PoemPage({ params }: PoemPageProps) {
 
         {/* Poem Body */}
         <div className="prose prose-lg max-w-none mb-8 font-hindi text-center">
-          <PortableText value={poem.body} />
+          <PortableText value={poem.body} components={poetryComponents} />
         </div>
 
         {/* Transliteration */}
@@ -122,7 +131,7 @@ export default async function PoemPage({ params }: PoemPageProps) {
           <div className="mb-8 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
             <h2 className="text-xl font-bold mb-4">Transliteration</h2>
             <div className="prose prose-lg max-w-none italic text-center">
-              <PortableText value={poem.transliteration} />
+              <PortableText value={poem.transliteration} components={poetryComponents} />
             </div>
           </div>
         )}
@@ -132,7 +141,7 @@ export default async function PoemPage({ params }: PoemPageProps) {
           <div className="mb-8 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
             <h2 className="text-xl font-bold mb-4">English Translation</h2>
             <div className="prose prose-lg max-w-none text-center">
-              <PortableText value={poem.translation} />
+              <PortableText value={poem.translation} components={poetryComponents} />
             </div>
           </div>
         )}
