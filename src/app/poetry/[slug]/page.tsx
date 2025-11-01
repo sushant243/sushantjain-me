@@ -12,7 +12,18 @@ import type { ReactNode } from 'react'
 const poetryComponents = {
   block: {
     normal: ({ children }: { children?: ReactNode }) => (
-      <p className="mb-6 whitespace-pre-line leading-relaxed">{children}</p>
+      // Each block = one couplet, with spacing between blocks
+      <div className="mb-6">
+        <p className="leading-loose">{children}</p>
+      </div>
+    ),
+  },
+  marks: {
+    strong: ({ children }: { children?: ReactNode }) => (
+      <strong className="font-bold">{children}</strong>
+    ),
+    em: ({ children }: { children?: ReactNode }) => (
+      <em className="italic">{children}</em>
     ),
   },
 }
