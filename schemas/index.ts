@@ -4,7 +4,6 @@ import { essay } from './essay'
 import { poem } from './poem'
 import { story } from './story'
 import { blockContent } from './blockContent'
-import { poemBlock } from './poemBlock'
 import { siteSettings } from './siteSettings'
 
 export const schemaTypes = [
@@ -14,6 +13,5 @@ export const schemaTypes = [
   poem,
   story,
   blockContent,
-  poemBlock,
   siteSettings,
 ]

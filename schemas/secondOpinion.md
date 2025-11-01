@@ -1,35 +1,46 @@
-Perfect — thanks for sharing the schema.
-Here’s exactly what’s happening and how to fix your **line-break rendering issue** for poems stored as `blockContent`.
+Yep — I see exactly what Claude tried to do there 👇
+
+They created a new schema (`poemBlock`) identical to your existing `blockContent`, hoping that by changing the name or description, Sanity would start preserving Google Docs line breaks automatically.
+**But that can’t fix it** — because the root of the issue is not in the schema, it’s in how Portable Text works.
 
 ---
 
-## 🧩 What’s happening
+### ⚙️ Why Claude’s approach didn’t work
 
-In your setup:
-
-* `body` is of type **`blockContent`**, i.e. **Portable Text** — not a simple `text` field.
-* Portable Text **does preserve line breaks**, but only as **new paragraph blocks** (not inline `\n`).
-* So when you hit “Enter” once in Sanity, it creates a new paragraph (`<p>`).
-  But if you hit “Shift + Enter”, it adds a soft line break (`\n`) **inside the same paragraph** — and by default, Portable Text renderers collapse those.
-
-That’s why your **backend stores it fine**, but the **frontend shows everything tightly packed** (like image 2).
+* Both `blockContent` and `poemBlock` are still **Portable Text arrays of blocks**.
+* When you paste from Google Docs, Sanity’s editor converts what *looks like* line breaks into *soft breaks* (`\n`) inside the same block, **not into new blocks**.
+* So no matter what your schema is called, the stored structure stays the same.
+* The only place you can truly “preserve” those line breaks is when **rendering** them in your Next.js frontend.
 
 ---
 
-## ✅ The correct rendering solution
+### ✅ The real fix is purely frontend-side
 
-You should render the poem’s body like this in your frontend (Next.js/React):
+Replace your poem renderer with this version — this **handles both**:
+
+* New paragraphs (created by pressing Enter)
+* Soft line breaks (Shift+Enter or paste from Google Docs)
 
 ```tsx
+import React from 'react'
 import { PortableText } from '@portabletext/react'
 
 const components = {
   block: {
-    normal: ({ children }: any) => (
-      <p className="whitespace-pre-line leading-relaxed text-lg">
-        {children}
-      </p>
-    ),
+    normal: ({ children }: any) => {
+      const processed = children.map((child: any, i: number) => {
+        if (typeof child === 'string') {
+          return child.split('\n').map((line, j) => (
+            <React.Fragment key={`${i}-${j}`}>
+              {line}
+              <br />
+            </React.Fragment>
+          ))
+        }
+        return child
+      })
+      return <p className="whitespace-pre-line my-4 leading-8">{processed}</p>
+    },
   },
 }
 
@@ -38,39 +49,28 @@ export default function PoemBody({ value }: { value: any }) {
 }
 ```
 
-### 🔍 What this does:
-
-* `@portabletext/react` safely renders Sanity’s `blockContent`.
-* The `whitespace-pre-line` CSS ensures that **soft line breaks (`Shift + Enter`)** inside a stanza are preserved.
-* Each paragraph/stanza remains visually distinct.
-* Works beautifully for poetry and ghazals — no need for HTML hacks.
+✅ **Now you can freely copy-paste entire poems from Google Docs** — single, double, or mixed line breaks — and they’ll display *exactly* as in Docs.
 
 ---
 
-## 🪶 Bonus: Optional poetry styling
+### 🪶 Optional (for clean typography)
 
-You can make it more elegant for poems:
+You can wrap the component with:
 
 ```tsx
-<p className="whitespace-pre-line my-4 leading-8 font-[500] text-xl text-gray-800 font-[Noto_Serif_Devanagari]">
-  {children}
-</p>
+<div className="font-[Noto_Serif_Devanagari] text-xl text-gray-900">
+  <PoemBody value={poem.body} />
+</div>
 ```
 
-That gives:
+---
 
-* Natural stanza spacing
-* Clean Devanagari rendering
-* Line breaks exactly as you typed them in Sanity
+### 🔍 In short
+
+| Change                                               | Where it helps | Result            |
+| ---------------------------------------------------- | -------------- | ----------------- |
+| Claude’s `poemBlock` schema                          | Sanity backend | ❌ No change       |
+| Frontend `PortableText` component with `split('\n')` | Rendering      | ✅ Works perfectly |
 
 ---
 
-## ⚙️ Summary
-
-| Problem                                        | Reason                                         | Fix                                                        |
-| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------- |
-| Poem looks compressed (no visible line breaks) | Portable Text ignores soft line breaks in HTML | Use `@portabletext/react` with `whitespace-pre-line` style |
-
----
-
-Would you like me to show you the **exact Next.js component code** for your poem page (with title, date, author, and body nicely formatted like your screenshot but with proper line breaks)?

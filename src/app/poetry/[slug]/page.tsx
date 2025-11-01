@@ -8,14 +8,25 @@ import { poemBySlugQuery } from '@/lib/sanity.queries'
 import type { Poem } from '@/lib/sanity.types'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
+import React from 'react'
 
 const poetryComponents = {
   block: {
-    normal: ({ children }: { children?: ReactNode }) => (
-      <p className="whitespace-pre-line leading-loose my-6">
-        {children}
-      </p>
-    ),
+    normal: ({ children }: { children?: ReactNode }) => {
+      // Process children to handle line breaks from Google Docs paste
+      const processed = React.Children.map(children, (child, i) => {
+        if (typeof child === 'string') {
+          return child.split('\n').map((line, j) => (
+            <React.Fragment key={`${i}-${j}`}>
+              {line}
+              {j < child.split('\n').length - 1 && <br />}
+            </React.Fragment>
+          ))
+        }
+        return child
+      })
+      return <p className="my-6 leading-loose">{processed}</p>
+    },
   },
   marks: {
     strong: ({ children }: { children?: ReactNode }) => (

@@ -83,20 +83,20 @@ export const poem = defineType({
     defineField({
       name: 'body',
       title: 'Body',
-      type: 'poemBlock',
+      type: 'blockContent',
       validation: (Rule) => Rule.required(),
       description: 'The poem content - paste from Google Docs, line breaks preserved',
     }),
     defineField({
       name: 'transliteration',
       title: 'Transliteration',
-      type: 'poemBlock',
+      type: 'blockContent',
       description: 'Roman script version - paste directly, line breaks preserved',
     }),
     defineField({
       name: 'translation',
       title: 'Translation',
-      type: 'poemBlock',
+      type: 'blockContent',
       description: 'English translation - paste directly, line breaks preserved',
     }),
     defineField({
