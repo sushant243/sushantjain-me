@@ -12,20 +12,22 @@ import React from 'react'
 
 const poetryComponents = {
   block: {
-    normal: ({ children }: { children?: ReactNode }) => {
-      // Process children to handle line breaks from Google Docs paste
-      const processed = React.Children.map(children, (child, i) => {
-        if (typeof child === 'string') {
-          return child.split('\n').map((line, j) => (
-            <React.Fragment key={`${i}-${j}`}>
-              {line}
-              {j < child.split('\n').length - 1 && <br />}
-            </React.Fragment>
-          ))
-        }
-        return child
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    normal: ({ value }: any) => {
+      // Process raw block value to handle line breaks from Google Docs paste
+      const parts: React.ReactNode[] = []
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      value.children.forEach((child: any, i: number) => {
+        const text = String(child.text ?? '')
+        const lines = text.split('\n')
+        lines.forEach((line, j) => {
+          parts.push(<React.Fragment key={`${i}-${j}`}>{line}</React.Fragment>)
+          if (j < lines.length - 1) {
+            parts.push(<br key={`br-${i}-${j}`} />)
+          }
+        })
       })
-      return <p className="my-6 leading-loose">{processed}</p>
+      return <p className="my-6 leading-loose">{parts}</p>
     },
   },
   marks: {
