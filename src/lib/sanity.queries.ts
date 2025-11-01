@@ -80,7 +80,7 @@ export const poemsQuery = groq`
     form,
     language,
     tags,
-    audioFile,
+    "audioFile": audioFile.asset->url,
     publishedAt,
     "author": author->name
   }
@@ -95,7 +95,7 @@ export const poemBySlugQuery = groq`
     form,
     language,
     tags,
-    audioFile,
+    "audioFile": audioFile.asset->url,
     body,
     transliteration,
     translation,

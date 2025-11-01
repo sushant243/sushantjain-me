@@ -91,14 +91,7 @@ export interface Poem extends SanityDocument {
   form: 'ghazal' | 'freeVerse' | 'storyPoem'
   language: 'hi' | 'ur' | 'en'
   tags?: string[]
-  audioFile?: {
-    _type: 'file'
-    asset: {
-      _ref: string
-      _type: 'reference'
-    }
-    description?: string
-  }
+  audioFile?: string
   body: PortableTextBlock[]
   transliteration?: PortableTextBlock[]
   translation?: PortableTextBlock[]
