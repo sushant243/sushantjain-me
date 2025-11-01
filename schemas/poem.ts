@@ -83,21 +83,21 @@ export const poem = defineType({
     defineField({
       name: 'body',
       title: 'Body',
-      type: 'blockContent',
+      type: 'poemBlock',
       validation: (Rule) => Rule.required(),
-      description: 'The poem content - supports Hindi/Urdu typography',
+      description: 'The poem content - paste from Google Docs, line breaks preserved',
     }),
     defineField({
       name: 'transliteration',
       title: 'Transliteration',
-      type: 'blockContent',
-      description: 'Roman script version for Hindi/Urdu poems',
+      type: 'poemBlock',
+      description: 'Roman script version - paste directly, line breaks preserved',
     }),
     defineField({
       name: 'translation',
       title: 'Translation',
-      type: 'blockContent',
-      description: 'English translation if the poem is in Hindi/Urdu',
+      type: 'poemBlock',
+      description: 'English translation - paste directly, line breaks preserved',
     }),
     defineField({
       name: 'author',
