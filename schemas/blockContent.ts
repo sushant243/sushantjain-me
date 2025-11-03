@@ -27,6 +27,7 @@ export const blockContent = defineType({
           { title: 'Code', value: 'code' },
           { title: 'Underline', value: 'underline' },
           { title: 'Strike', value: 'strike-through' },
+          { title: 'Line Break', value: 'lineBreak' },
         ],
         annotations: [
           {

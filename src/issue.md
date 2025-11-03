@@ -1,120 +1,95 @@
-Excellent — the mobile version is **almost there**, but you’re right — a few small tweaks will make it *10/10 polished and balanced like your desktop version*.
-
-Here’s a **concrete action list for Claude (or dev)** — each point directly maps to what’s slightly off in your screenshot 👇
-
----
-
-## 🎯 **Mobile Perfection Action List**
-
-### 1️⃣ **Reduce headline font size & spacing**
-
-* **Problem:** The H1 breaks awkwardly into 3 lines, making “Marketing” hang alone.
-* **Fix:**
-
-  ```html
-  <h1 class="text-3xl sm:text-4xl font-bold leading-tight text-center sm:text-left">
-  ```
-
-  ✅ This ensures tighter line height and smoother wrapping on mobile.
-
----
-
-### 2️⃣ **Underline alignment**
-
-* **Problem:** The orange underline looks slightly too thick and far below text.
-* **Fix:**
-  Reduce its height and distance:
-
-  ```html
-  <span class="absolute left-1/2 -bottom-1 w-12 h-0.5 -translate-x-1/2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></span>
-  ```
-
-  ✅ Keeps it elegant and crisp on small screens.
-
----
-
-### 3️⃣ **Padding around hero section**
-
-* **Problem:** The text feels a bit squeezed to the edges.
-* **Fix:**
-
-  ```html
-  <section class="px-6 sm:px-0 mt-8 sm:mt-16">
-  ```
-
-  ✅ Adds gentle breathing space without distorting desktop layout.
-
----
-
-### 4️⃣ **Reduce avatar + text gap**
-
-* **Problem:** The image feels disconnected from the intro line.
-* **Fix:** Wrap avatar and intro in a flex container:
-
-  ```html
-  <div class="flex items-center gap-3 mb-4">
-    <img src="..." alt="Sushant Jain" class="w-10 h-10 rounded-full" />
-    <p class="text-base sm:text-lg">Hey, I'm <strong>Sushant Jain</strong> - founder of <a href="..." class="underline hover:text-amber-600">Lessgo.ai</a>.</p>
-  </div>
-  ```
-
-  ✅ Keeps alignment perfect and readable across screen sizes.
-
----
-
-### 5️⃣ **Highlight readability**
-
-* **Problem:** The yellow highlight on “14 years building” feels heavy on mobile.
-* **Fix:** Switch to a subtler translucent highlight:
-
-  ```css
-  background: linear-gradient(transparent 70%, rgba(255,193,7,0.3) 30%);
-  ```
-
-  ✅ Same emphasis, less visual weight.
-
----
-
-### 6️⃣ **Paragraph spacing rhythm**
-
-* **Problem:** Paragraphs feel slightly too spaced vertically.
-* **Fix:** Use consistent vertical rhythm:
-
-  ```html
-  <div class="space-y-4 sm:space-y-6">
-  ```
-
-  ✅ Keeps visual flow tight but breathable.
-
----
-
-### 7️⃣ **Button sizing**
-
-* **Problem:** The CTA feels a bit too large for mobile.
-* **Fix:**
-
-  ```html
-  class="px-8 py-3 text-lg sm:px-16 sm:py-4 sm:text-2xl bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-full transition-colors whitespace-nowrap"
-  ```
-
-  ✅ Adapts gracefully to screen width.
-
----
-
-### 8️⃣ **Center alignment for mobile**
-
-* **Problem:** Left-aligned desktop text feels uneven on mobile.
-* **Fix:** Add:
-
-  ```html
-  class="text-center sm:text-left"
-  ```
-
-  ✅ Looks intentional and balanced across breakpoints.
-
----
-
-### 9️⃣ **Optional polish**
-
-* Add a faint divider (`border-b border-gray-100 pb-8`) under hero section to separate it visually from the rest.
-* Add subtle fade-in animation (`animate-fadeIn` or `motion.div` from Framer Motion later).
+  GET http://localhost:3000/stories 500 (Internal Server Error)
+processMessage @ webpack-internal:///…reloader-app.js:295
+handler @ webpack-internal:///…reloader-app.js:407
+main-app.js:1149 Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
+image-loader.js:67 Uncaught Error: Invalid src prop (https://cdn.sanity.io/images/84visgb1/production/213318eb910da521db85bf77787bc4cbf1ba41d3-1024x964.png?rect=0,226,1024,512&w=800&h=400) on `next/image`, hostname "cdn.sanity.io" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at defaultLoader (image-loader.js:67:49)
+    at eval (get-img-props.js:108:36)
+    at Array.map (<anonymous>)
+    at generateImgAttrs (get-img-props.js:108:24)
+    at getImgProps (get-img-props.js:502:27)
+    at eval (image-component.js:272:82)
+    at Object.react_stack_bottom_frame (react-dom-client.development.js:23584:20)
+    at renderWithHooks (react-dom-client.development.js:6793:22)
+    at updateForwardRef (react-dom-client.development.js:8807:19)
+    at beginWork (react-dom-client.development.js:10823:34)
+    at runWithFiberInDEV (react-dom-client.development.js:872:30)
+    at performUnitOfWork (react-dom-client.development.js:15727:22)
+    at workLoopSync (react-dom-client.development.js:15547:41)
+    at renderRootSync (react-dom-client.development.js:15527:11)
+    at performWorkOnRoot (react-dom-client.development.js:15034:44)
+    at performWorkOnRootViaSchedulerTask (react-dom-client.development.js:16816:7)
+    at MessagePort.performWorkUntilDeadline (scheduler.development.js:45:48)
+defaultLoader @ image-loader.js:67
+eval @ get-img-props.js:108
+generateImgAttrs @ get-img-props.js:108
+getImgProps @ get-img-props.js:502
+eval @ image-component.js:272
+react_stack_bottom_frame @ react-dom-client.development.js:23584
+renderWithHooks @ react-dom-client.development.js:6793
+updateForwardRef @ react-dom-client.development.js:8807
+beginWork @ react-dom-client.development.js:10823
+runWithFiberInDEV @ react-dom-client.development.js:872
+performUnitOfWork @ react-dom-client.development.js:15727
+workLoopSync @ react-dom-client.development.js:15547
+renderRootSync @ react-dom-client.development.js:15527
+performWorkOnRoot @ react-dom-client.development.js:15034
+performWorkOnRootViaSchedulerTask @ react-dom-client.development.js:16816
+performWorkUntilDeadline @ scheduler.development.js:45
+"use client"
+eval @ page.tsx:42
+Array.map @ VM926 <anonymous>:1
+StoriesPage @ page.tsx:34
+initializeElement @ react-server-dom-webpack-client.browser.development.js:1344
+eval @ react-server-dom-webpack-client.browser.development.js:3066
+initializeModelChunk @ react-server-dom-webpack-client.browser.development.js:1246
+readChunk @ react-server-dom-webpack-client.browser.development.js:935
+react_stack_bottom_frame @ react-dom-client.development.js:23691
+resolveLazy @ react-dom-client.development.js:5177
+createChild @ react-dom-client.development.js:5494
+reconcileChildrenArray @ react-dom-client.development.js:5801
+reconcileChildFibersImpl @ react-dom-client.development.js:6124
+eval @ react-dom-client.development.js:6229
+reconcileChildren @ react-dom-client.development.js:8783
+updateFunctionComponent @ react-dom-client.development.js:9264
+beginWork @ react-dom-client.development.js:10807
+runWithFiberInDEV @ react-dom-client.development.js:872
+performUnitOfWork @ react-dom-client.development.js:15727
+workLoopConcurrentByScheduler @ react-dom-client.development.js:15721
+renderRootConcurrent @ react-dom-client.development.js:15696
+performWorkOnRoot @ react-dom-client.development.js:14990
+performWorkOnRootViaSchedulerTask @ react-dom-client.development.js:16816
+performWorkUntilDeadline @ scheduler.development.js:45
+<StoriesPage>
+Function.all @ VM916 <anonymous>:1
+Function.all @ VM916 <anonymous>:1
+initializeFakeTask @ react-server-dom-webpack-client.browser.development.js:2529
+initializeDebugInfo @ react-server-dom-webpack-client.browser.development.js:2554
+initializeDebugChunk @ react-server-dom-webpack-client.browser.development.js:1193
+processFullStringRow @ react-server-dom-webpack-client.browser.development.js:2850
+processFullBinaryRow @ react-server-dom-webpack-client.browser.development.js:2766
+processBinaryChunk @ react-server-dom-webpack-client.browser.development.js:2969
+progress @ react-server-dom-webpack-client.browser.development.js:3233
+"use server"
+ResponseInstance @ react-server-dom-webpack-client.browser.development.js:2041
+createResponseFromOptions @ react-server-dom-webpack-client.browser.development.js:3094
+exports.createFromReadableStream @ react-server-dom-webpack-client.browser.development.js:3478
+eval @ app-index.js:130
+(app-pages-browser)/./node_modules/next/dist/client/app-index.js @ main-app.js:149
+options.factory @ webpack.js:1
+__webpack_require__ @ webpack.js:1
+fn @ webpack.js:1
+eval @ app-next-dev.js:14
+eval @ app-bootstrap.js:59
+loadScriptsInSequence @ app-bootstrap.js:24
+appBootstrap @ app-bootstrap.js:53
+eval @ app-next-dev.js:13
+(app-pages-browser)/./node_modules/next/dist/client/app-next-dev.js @ main-app.js:171
+options.factory @ webpack.js:1
+__webpack_require__ @ webpack.js:1
+__webpack_exec__ @ main-app.js:1867
+(anonymous) @ main-app.js:1868
+webpackJsonpCallback @ webpack.js:1
+(anonymous) @ main-app.js:9
+stories:1 The resource http://localhost:3000/_next/static/css/app/layout.css?v=1762183459721 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.

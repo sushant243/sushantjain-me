@@ -68,6 +68,7 @@ const components = {
         </a>
       )
     },
+    lineBreak: () => <br />,
   },
   block: {
     h1: ({ children }: { children?: ReactNode }) => <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>,

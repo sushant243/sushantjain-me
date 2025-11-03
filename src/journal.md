@@ -1,26 +1,19 @@
-[Day 12] - "He Said Yes, Then Ghosted Me"
-
-Yesterday I wrote about the hot lead who loved the demo.
-
-Today? Crickets.
-
-I sent a follow-up. Nothing. Checked LinkedIn—he's active, posting memes. 
-
-So I did what my B2B sales brain told me: I called him.
-
-"Hey man, just being direct—did I lose you? What happened?"
-
-Turns out: his boss shut it down. Budget freeze. He was embarrassed to tell me.
-
-Here's the thing: in 14 years of sales, I've learned ghosting is rarely about you. It's about them. But you have to ASK to find out.
-
-The real lesson? I'm going after solopreneurs and small teams, but this guy had to get boss approval. Wrong target. I'm moving down the ladder, not up.
-
-Tomorrow: Back to talking to founders who control their own budgets.
-
----
-📊 Current State:
-- Marketing/Building: 80% / 20%
-- This Week's Conversations: 4 (2 qualified, 1 ghost, 1 wrong fit)
-- Current Goal: First $ by Nov 30 [████░░░░░░] 40%
-- Runway: Month 7/18
+image-loader.js:67 Uncaught Error: Invalid src prop (https://cdn.sanity.io/images/84visgb1/production/213318eb910da521db85bf77787bc4cbf1ba41d3-1024x964.png?rect=0,226,1024,512&w=800&h=400) on `next/image`, hostname "cdn.sanity.io" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at defaultLoader (image-loader.js:67:49)
+    at eval (get-img-props.js:108:36)
+    at Array.map (<anonymous>)
+    at generateImgAttrs (get-img-props.js:108:24)
+    at getImgProps (get-img-props.js:502:27)
+    at eval (image-component.js:272:82)
+    at Object.react_stack_bottom_frame (react-dom-client.development.js:23584:20)
+    at renderWithHooks (react-dom-client.development.js:6793:22)
+    at updateForwardRef (react-dom-client.development.js:8807:19)
+    at beginWork (react-dom-client.development.js:10823:34)
+    at runWithFiberInDEV (react-dom-client.development.js:872:30)
+    at performUnitOfWork (react-dom-client.development.js:15727:22)
+    at workLoopSync (react-dom-client.development.js:15547:41)
+    at renderRootSync (react-dom-client.development.js:15527:11)
+    at performWorkOnRoot (react-dom-client.development.js:15034:44)
+    at performWorkOnRootViaSchedulerTask (react-dom-client.development.js:16816:7)
+    at MessagePort.performWorkUntilDeadline (scheduler.development.js:45:48)

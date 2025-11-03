@@ -1,9 +1,10 @@
 import { notFound } from 'next/navigation'
 import { format } from 'date-fns'
 import { Calendar } from 'lucide-react'
+import Image from 'next/image'
 import Container from '@/components/Container'
-import { PortableText } from '@portabletext/react'
-import { client } from '@/lib/sanity.client'
+import PortableText from '@/components/PortableText'
+import { client, urlFor } from '@/lib/sanity.client'
 import { storyBySlugQuery } from '@/lib/sanity.queries'
 import type { StoryBySlugQueryResult } from '@/lib/sanity.types'
 import type { Metadata } from 'next'
@@ -90,9 +91,28 @@ export default async function StoryPage({ params }: StoryPageProps) {
           )}
         </header>
 
+        {/* Cover Image */}
+        {story.coverImage && (
+          <div className="mb-8 overflow-hidden rounded-lg">
+            <Image
+              src={urlFor(story.coverImage).width(1200).fit('max').url()}
+              alt={story.coverImage.alt || story.title || 'Story cover'}
+              width={1200}
+              height={800}
+              className="w-full h-auto"
+              priority
+            />
+            {story.coverImage.caption && (
+              <p className="mt-2 text-sm text-center text-gray-600 dark:text-gray-400 italic">
+                {story.coverImage.caption}
+              </p>
+            )}
+          </div>
+        )}
+
         {/* Story Content */}
         {story.body && (
-          <div className="prose prose-lg max-w-none mb-12 font-hindi">
+          <div className="mb-12 font-hindi">
             <PortableText value={story.body} />
           </div>
         )}
