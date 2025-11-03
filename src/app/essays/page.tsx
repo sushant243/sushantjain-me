@@ -5,10 +5,10 @@ import { Calendar } from 'lucide-react'
 import { format } from 'date-fns'
 import { client, urlFor } from '@/lib/sanity.client'
 import { essaysQuery } from '@/lib/sanity.queries'
-import type { Essay } from '@/lib/sanity.types'
+import type { EssaysQueryResult } from '@/lib/sanity.types'
 
 async function getEssays() {
-  const essays = await client.fetch<Essay[]>(essaysQuery)
+  const essays = await client.fetch<EssaysQueryResult>(essaysQuery)
   return essays
 }
 
@@ -28,22 +28,24 @@ export default async function EssaysPage() {
         {/* Featured Essay */}
         {essays.slice(0, 1).map((essay) => (
           <div
-            key={essay.slug.current}
+            key={essay.slug?.current}
             className="mb-12 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg border border-blue-200 dark:border-blue-800"
           >
             <div className="mb-2 text-sm font-medium text-blue-600">Featured Essay</div>
-            <Link href={`/essays/${essay.slug.current}`} className="group">
+            <Link href={`/essays/${essay.slug?.current}`} className="group">
               <h2 className="text-3xl font-bold mb-3 group-hover:text-blue-600 transition-colors">
                 {essay.title}
               </h2>
               <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
-                <span className="flex items-center gap-1">
-                  <Calendar className="w-4 h-4" />
-                  {format(new Date(essay.date), 'MMMM d, yyyy')}
-                </span>
+                {essay.date && (
+                  <span className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    {format(new Date(essay.date), 'MMMM d, yyyy')}
+                  </span>
+                )}
                 {essay.author && (
                   <span className="text-gray-600 dark:text-gray-400">
-                    by {essay.author.name}
+                    by {essay.author}
                   </span>
                 )}
               </div>
@@ -63,12 +65,12 @@ export default async function EssaysPage() {
               key={essay._id}
               className="border-b border-gray-200 dark:border-gray-800 pb-8 last:border-0"
             >
-              <Link href={`/essays/${essay.slug.current}`} className="group block">
+              <Link href={`/essays/${essay.slug?.current}`} className="group block">
                 {essay.coverImage && (
                   <div className="mb-4 overflow-hidden rounded-lg">
                     <Image
                       src={urlFor(essay.coverImage).width(800).height(400).url()}
-                      alt={essay.coverImage.alt || essay.title}
+                      alt={essay.coverImage.alt || essay.title || 'Essay cover'}
                       width={800}
                       height={400}
                       className="w-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -79,13 +81,15 @@ export default async function EssaysPage() {
                   {essay.title}
                 </h2>
                 <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    {format(new Date(essay.date), 'MMMM d, yyyy')}
-                  </span>
+                  {essay.date && (
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      {format(new Date(essay.date), 'MMMM d, yyyy')}
+                    </span>
+                  )}
                   {essay.author && (
                     <span className="text-gray-600 dark:text-gray-400">
-                      by {essay.author.name}
+                      by {essay.author}
                     </span>
                   )}
                 </div>

@@ -5,10 +5,10 @@ import { Calendar } from 'lucide-react'
 import { format } from 'date-fns'
 import { client, urlFor } from '@/lib/sanity.client'
 import { storiesQuery } from '@/lib/sanity.queries'
-import type { Story } from '@/lib/sanity.types'
+import type { StoriesQueryResult } from '@/lib/sanity.types'
 
 async function getStories() {
-  const stories = await client.fetch<Story[]>(storiesQuery)
+  const stories = await client.fetch<StoriesQueryResult>(storiesQuery)
   return stories
 }
 
@@ -36,12 +36,12 @@ export default async function StoriesPage() {
               key={story._id}
               className="border border-gray-200 dark:border-gray-800 rounded-lg p-6 hover:shadow-lg transition-shadow"
             >
-              <Link href={`/stories/${story.slug.current}`} className="block">
+              <Link href={`/stories/${story.slug?.current}`} className="block">
                 {story.coverImage && (
                   <div className="mb-4 overflow-hidden rounded-lg">
                     <Image
                       src={urlFor(story.coverImage).width(800).height(400).url()}
-                      alt={story.coverImage.alt || story.title}
+                      alt={story.coverImage.alt || story.title || 'Story cover'}
                       width={800}
                       height={400}
                       className="w-full object-cover"
@@ -66,10 +66,12 @@ export default async function StoriesPage() {
                 )}
 
                 <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    {format(new Date(story.date), 'MMMM d, yyyy')}
-                  </span>
+                  {story.date && (
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      {format(new Date(story.date), 'MMMM d, yyyy')}
+                    </span>
+                  )}
                   {story.language && (
                     <span className="px-2 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded text-xs">
                       {languageLabels[story.language]}
@@ -77,7 +79,7 @@ export default async function StoriesPage() {
                   )}
                   {story.author && (
                     <span className="text-gray-600 dark:text-gray-400">
-                      by {story.author.name}
+                      by {story.author}
                     </span>
                   )}
                 </div>

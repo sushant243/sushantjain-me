@@ -2,50 +2,18 @@ import { notFound } from 'next/navigation'
 import { format } from 'date-fns'
 import { Calendar, Music } from 'lucide-react'
 import Container from '@/components/Container'
-import { PortableText } from '@portabletext/react'
 import { client } from '@/lib/sanity.client'
 import { poemBySlugQuery } from '@/lib/sanity.queries'
-import type { Poem } from '@/lib/sanity.types'
+import type { PoemBySlugQueryResult } from '@/lib/sanity.types'
 import type { Metadata } from 'next'
-import type { ReactNode } from 'react'
-import React from 'react'
-
-const poetryComponents = {
-  block: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    normal: ({ value }: any) => {
-      // Process raw block value to handle line breaks from Google Docs paste
-      const parts: React.ReactNode[] = []
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      value.children.forEach((child: any, i: number) => {
-        const text = String(child.text ?? '')
-        const lines = text.split('\n')
-        lines.forEach((line, j) => {
-          parts.push(<React.Fragment key={`${i}-${j}`}>{line}</React.Fragment>)
-          if (j < lines.length - 1) {
-            parts.push(<br key={`br-${i}-${j}`} />)
-          }
-        })
-      })
-      return <p className="my-6 leading-loose">{parts}</p>
-    },
-  },
-  marks: {
-    strong: ({ children }: { children?: ReactNode }) => (
-      <strong className="font-bold">{children}</strong>
-    ),
-    em: ({ children }: { children?: ReactNode }) => (
-      <em className="italic">{children}</em>
-    ),
-  },
-}
+import PoemContent from './PoemContent'
 
 interface PoemPageProps {
   params: Promise<{ slug: string }>
 }
 
 async function getPoem(slug: string) {
-  const poem = await client.fetch<Poem>(poemBySlugQuery, { slug })
+  const poem = await client.fetch<PoemBySlugQueryResult>(poemBySlugQuery, { slug })
   return poem
 }
 
@@ -60,8 +28,8 @@ export async function generateMetadata({ params }: PoemPageProps): Promise<Metad
   }
 
   return {
-    title: poem.title,
-    description: poem.seoDescription || `${poem.form === 'ghazal' ? 'Ghazal' : 'Poem'}: ${poem.title}`,
+    title: poem.title || 'Poem',
+    description: poem.seoDescription || 'Poem',
   }
 }
 
@@ -91,9 +59,11 @@ export default async function PoemPage({ params }: PoemPageProps) {
         {/* Header */}
         <header className="mb-8">
           <div className="flex items-center gap-2 mb-4">
-            <span className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">
-              {languageLabels[poem.language]}
-            </span>
+            {poem.language && (
+              <span className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">
+                {languageLabels[poem.language]}
+              </span>
+            )}
             {poem.form && (
               <span className="px-2 py-1 text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded">
                 {formLabels[poem.form]}
@@ -111,13 +81,15 @@ export default async function PoemPage({ params }: PoemPageProps) {
           </h1>
 
           <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
-            <div className="flex items-center gap-1">
-              <Calendar className="w-4 h-4" />
-              <time dateTime={poem.date}>
-                {format(new Date(poem.date), 'MMMM d, yyyy')}
-              </time>
-            </div>
-            {poem.author && <span>• {poem.author.name}</span>}
+            {poem.date && (
+              <div className="flex items-center gap-1">
+                <Calendar className="w-4 h-4" />
+                <time dateTime={poem.date}>
+                  {format(new Date(poem.date), 'MMMM d, yyyy')}
+                </time>
+              </div>
+            )}
+            {poem.author?.name && <span>• {poem.author.name}</span>}
           </div>
 
           {poem.tags && poem.tags.length > 0 && (
@@ -144,30 +116,12 @@ export default async function PoemPage({ params }: PoemPageProps) {
           </div>
         )}
 
-        {/* Poem Body */}
-        <div className="prose prose-lg max-w-none mb-8 font-hindi text-center">
-          <PortableText value={poem.body} components={poetryComponents} />
-        </div>
-
-        {/* Transliteration */}
-        {poem.transliteration && (
-          <div className="mb-8 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
-            <h2 className="text-xl font-bold mb-4">Transliteration</h2>
-            <div className="prose prose-lg max-w-none italic text-center">
-              <PortableText value={poem.transliteration} components={poetryComponents} />
-            </div>
-          </div>
-        )}
-
-        {/* Translation */}
-        {poem.translation && (
-          <div className="mb-8 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
-            <h2 className="text-xl font-bold mb-4">English Translation</h2>
-            <div className="prose prose-lg max-w-none text-center">
-              <PortableText value={poem.translation} components={poetryComponents} />
-            </div>
-          </div>
-        )}
+        {/* Poem Content with Toggle Sections */}
+        <PoemContent
+          body={poem.body}
+          transliteration={poem.transliteration}
+          translation={poem.translation}
+        />
       </article>
     </Container>
   )

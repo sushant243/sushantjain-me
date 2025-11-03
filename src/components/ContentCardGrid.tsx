@@ -3,12 +3,12 @@ import { PenTool, Video, FileText } from 'lucide-react'
 import JournalEntryList from './JournalEntryList'
 import PodcastEpisodeList from './PodcastEpisodeList'
 import EssayList from './EssayList'
-import type { Journal, Podcast, Essay } from '@/lib/sanity.types'
+import type { LatestContentQueryResult } from '@/lib/sanity.types'
 
 interface ContentCardGridProps {
-  journals: Journal[]
-  podcasts: Podcast[]
-  essays: Essay[]
+  journals: LatestContentQueryResult['journals']
+  podcasts: LatestContentQueryResult['podcasts']
+  essays: LatestContentQueryResult['essays']
 }
 
 export default function ContentCardGrid({ journals, podcasts, essays }: ContentCardGridProps) {

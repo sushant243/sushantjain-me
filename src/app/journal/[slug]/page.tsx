@@ -62,12 +62,14 @@ export default async function JournalEntryPage({ params }: JournalPageProps) {
           </h1>
 
           <div className="flex items-center gap-4 text-sm text-brand-text-secondary mb-4">
-            <div className="flex items-center gap-1">
-              <Calendar className="w-4 h-4" />
-              <time dateTime={journal.date}>
-                {format(new Date(journal.date), 'MMMM d, yyyy')}
-              </time>
-            </div>
+            {journal.date && (
+              <div className="flex items-center gap-1">
+                <Calendar className="w-4 h-4" />
+                <time dateTime={journal.date}>
+                  {format(new Date(journal.date), 'MMMM d, yyyy')}
+                </time>
+              </div>
+            )}
             {journal.cadence && (
               <div className="flex items-center gap-1">
                 <Clock className="w-4 h-4" />
@@ -91,9 +93,11 @@ export default async function JournalEntryPage({ params }: JournalPageProps) {
         </header>
 
         {/* Body */}
-        <div className="prose prose-lg max-w-none mb-12">
-          <PortableText value={journal.body} />
-        </div>
+        {journal.body && (
+          <div className="prose prose-lg max-w-none mb-12">
+            <PortableText value={journal.body} />
+          </div>
+        )}
 
         {/* Stats Section */}
         {journal.stats && (

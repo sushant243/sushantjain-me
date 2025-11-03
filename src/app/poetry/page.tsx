@@ -4,10 +4,10 @@ import { Calendar, Music } from 'lucide-react'
 import { format } from 'date-fns'
 import { client } from '@/lib/sanity.client'
 import { poemsQuery } from '@/lib/sanity.queries'
-import type { Poem } from '@/lib/sanity.types'
+import type { PoemsQueryResult } from '@/lib/sanity.types'
 
 async function getPoems() {
-  const poems = await client.fetch<Poem[]>(poemsQuery)
+  const poems = await client.fetch<PoemsQueryResult>(poemsQuery)
   return poems
 }
 
@@ -42,7 +42,7 @@ export default async function PoetryPage() {
               key={poem._id}
               className="border border-gray-200 dark:border-gray-800 rounded-lg p-6 hover:shadow-lg transition-shadow"
             >
-              <Link href={`/poetry/${poem.slug.current}`} className="block">
+              <Link href={`/poetry/${poem.slug?.current}`} className="block">
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <h2 className="text-2xl font-bold font-hindi mb-1">
@@ -55,9 +55,11 @@ export default async function PoetryPage() {
                     )}
                   </div>
                   <div className="flex gap-2">
-                    <span className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">
-                      {languageLabels[poem.language]}
-                    </span>
+                    {poem.language && (
+                      <span className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">
+                        {languageLabels[poem.language]}
+                      </span>
+                    )}
                     {poem.form && (
                       <span className="px-2 py-1 text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded">
                         {formLabels[poem.form]}
@@ -84,15 +86,17 @@ export default async function PoetryPage() {
                   </div>
                 )}
 
-                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                  <Calendar className="w-4 h-4" />
-                  <time dateTime={poem.date}>
-                    {format(new Date(poem.date), 'MMMM d, yyyy')}
-                  </time>
-                  {poem.author && (
-                    <span className="ml-2">• {poem.author.name}</span>
-                  )}
-                </div>
+                {poem.date && (
+                  <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                    <Calendar className="w-4 h-4" />
+                    <time dateTime={poem.date}>
+                      {format(new Date(poem.date), 'MMMM d, yyyy')}
+                    </time>
+                    {poem.author && (
+                      <span className="ml-2">• {poem.author}</span>
+                    )}
+                  </div>
+                )}
               </Link>
             </article>
           ))}
