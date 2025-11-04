@@ -20,8 +20,8 @@ export default function VideoCoursePage() {
 
           <hr className="border-t border-neutral-200 my-6" />
 
-          <p> I also wasn't a natural on camera. <br /> <span className='italic'>English isn't my first language</span>... I grew up in Hindi medium school so speaking for five hours on video was a stretch. <br /> But <span className='font-bold'>I practiced for 90 days</span> and did it anyway.
-<br /> <br />Looking back, <span className='font-bold'>I'm proud of that version of me.</span> <br />He didn't have perfect delivery, but he had courage.</p>
+          <p> I also wasn&apos;t a natural on camera. <br /> <span className='italic'>English isn&apos;t my first language</span>... I grew up in Hindi medium school so speaking for five hours on video was a stretch. <br /> But <span className='font-bold'>I practiced for 90 days</span> and did it anyway.
+<br /> <br />Looking back, <span className='font-bold'>I&apos;m proud of that version of me.</span> <br />He didn&apos;t have perfect delivery, but he had courage.</p>
 
           <hr className="border-t border-neutral-200 my-6" />
 

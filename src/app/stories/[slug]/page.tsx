@@ -8,6 +8,7 @@ import { client, urlFor } from '@/lib/sanity.client'
 import { storyBySlugQuery } from '@/lib/sanity.queries'
 import type { StoryBySlugQueryResult } from '@/lib/sanity.types'
 import type { Metadata } from 'next'
+import type { PortableTextBlock } from '@portabletext/types'
 
 interface StoryPageProps {
   params: Promise<{ slug: string }>
@@ -113,7 +114,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
         {/* Story Content */}
         {story.body && (
           <div className="mb-12 font-hindi">
-            <PortableText value={story.body} />
+            <PortableText value={story.body as PortableTextBlock[]} />
           </div>
         )}
       </article>
