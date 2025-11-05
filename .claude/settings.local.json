@@ -12,7 +12,9 @@
       "Bash(npx sanity@latest typegen:*)",
       "Bash(npm run build:*)",
       "Bash(git checkout:*)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Bash(dir:*)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []

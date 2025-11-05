@@ -22,6 +22,10 @@ const notoSerifDevanagari = Noto_Serif_Devanagari({
 export const metadata: Metadata = {
   title: "Sushant Jain",
   description: "Personal brand website featuring Journal, Essays, Poetry & Short Stories",
+  icons: {
+    icon: '/icon.png',
+    apple: '/apple-icon.png',
+  },
 };
 
 import Header from '@/components/Header'
