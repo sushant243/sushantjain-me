@@ -4,9 +4,12 @@ import { Calendar } from 'lucide-react'
 import Image from 'next/image'
 import Container from '@/components/Container'
 import PortableText from '@/components/PortableText'
+import Breadcrumb from '@/components/Breadcrumb'
+import BackLink from '@/components/BackLink'
+import RelatedContent from '@/components/RelatedContent'
 import { client, urlFor } from '@/lib/sanity.client'
-import { storyBySlugQuery } from '@/lib/sanity.queries'
-import type { StoryBySlugQueryResult } from '@/lib/sanity.types'
+import { storyBySlugQuery, storiesQuery } from '@/lib/sanity.queries'
+import type { StoryBySlugQueryResult, Story } from '@/lib/sanity.types'
 import type { Metadata } from 'next'
 import type { PortableTextBlock } from '@portabletext/types'
 
@@ -43,6 +46,9 @@ export default async function StoryPage({ params }: StoryPageProps) {
     notFound()
   }
 
+  // Fetch all stories for related content
+  const allStories = await client.fetch<Story[]>(storiesQuery)
+
   const languageLabels: Record<string, string> = {
     hi: 'हिंदी',
     ur: 'اردو',
@@ -52,8 +58,16 @@ export default async function StoryPage({ params }: StoryPageProps) {
   return (
     <Container className="py-12">
       <article className="max-w-3xl mx-auto">
+        {/* Breadcrumb */}
+        <Breadcrumb
+          items={[
+            { label: 'Stories', href: '/stories' },
+            { label: story.title || 'Story' },
+          ]}
+        />
+
         {/* Header */}
-        <header className="mb-8">
+        <header className="mb-8 mt-12">
           <div className="flex items-center gap-2 mb-4">
             {story.language && (
               <span className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">
@@ -117,6 +131,28 @@ export default async function StoryPage({ params }: StoryPageProps) {
             <PortableText value={story.body as PortableTextBlock[]} />
           </div>
         )}
+
+        {/* Bottom Navigation */}
+        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+          <BackLink href="/stories" label="Back to Stories" />
+        </div>
+
+        {/* Related Stories */}
+        <RelatedContent
+          currentSlug={story.slug?.current || ''}
+          currentTags={story.tags || []}
+          allItems={allStories
+            .filter(s => s.slug?.current && s.title && s.date)
+            .map((s) => ({
+              slug: s.slug!.current!,
+              title: s.title!,
+              description: s.excerpt || undefined,
+              date: s.date!,
+              tags: s.tags || [],
+            }))}
+          sectionName="Stories"
+          sectionHref="/stories"
+        />
       </article>
     </Container>
   )

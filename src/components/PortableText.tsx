@@ -1,6 +1,7 @@
 import { PortableText as PortableTextReact } from '@portabletext/react'
 import type { PortableTextBlock } from '@portabletext/types'
 import type { ReactNode } from 'react'
+import type { BlockContent } from '@/lib/sanity.types'
 import Image from 'next/image'
 import { urlFor } from '@/lib/sanity.client'
 
@@ -72,9 +73,9 @@ const components = {
   },
   block: {
     h1: ({ children }: { children?: ReactNode }) => <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>,
-    h2: ({ children }: { children?: ReactNode }) => <h2 className="text-2xl font-bold mt-6 mb-3">{children}</h2>,
-    h3: ({ children }: { children?: ReactNode }) => <h3 className="text-xl font-bold mt-4 mb-2">{children}</h3>,
-    h4: ({ children }: { children?: ReactNode }) => <h4 className="text-lg font-bold mt-3 mb-2">{children}</h4>,
+    h2: ({ children }: { children?: ReactNode }) => <h2 className="text-3xl font-bold mt-6 mb-3">{children}</h2>,
+    h3: ({ children }: { children?: ReactNode }) => <h3 className="text-2xl font-semibold mt-4 mb-2">{children}</h3>,
+    h4: ({ children }: { children?: ReactNode }) => <h4 className="text-lg font-semibold mt-3 mb-2">{children}</h4>,
     blockquote: ({ children }: { children?: ReactNode }) => (
       <blockquote className="border-l-4 border-gray-300 pl-4 my-4 italic">{children}</blockquote>
     ),
@@ -91,13 +92,14 @@ const components = {
 }
 
 interface PortableTextProps {
-  value: PortableTextBlock[]
+  value: PortableTextBlock[] | BlockContent
   className?: string
 }
 
 export default function PortableText({ value, className = '' }: PortableTextProps) {
   return (
     <div className={`prose prose-gray max-w-none ${className}`}>
+      {/* @ts-expect-error - Sanity BlockContent type not fully compatible with PortableTextBlock */}
       <PortableTextReact value={value} components={components} />
     </div>
   )

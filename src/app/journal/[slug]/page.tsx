@@ -3,9 +3,12 @@ import { format } from 'date-fns'
 import { Calendar, Clock } from 'lucide-react'
 import Container from '@/components/Container'
 import { PortableText } from '@portabletext/react'
+import Breadcrumb from '@/components/Breadcrumb'
+import BackLink from '@/components/BackLink'
+import RelatedContent from '@/components/RelatedContent'
 import { client } from '@/lib/sanity.client'
-import { journalBySlugQuery } from '@/lib/sanity.queries'
-import type { Journal } from '@/lib/sanity.types'
+import { journalBySlugQuery, journalsQuery } from '@/lib/sanity.queries'
+import type { JournalBySlugQueryResult, JournalsQueryResult } from '@/lib/sanity.types'
 import type { Metadata } from 'next'
 
 interface JournalPageProps {
@@ -13,7 +16,7 @@ interface JournalPageProps {
 }
 
 async function getJournal(slug: string) {
-  const journal = await client.fetch<Journal>(journalBySlugQuery, { slug })
+  const journal = await client.fetch<JournalBySlugQueryResult>(journalBySlugQuery, { slug })
   return journal
 }
 
@@ -41,6 +44,9 @@ export default async function JournalEntryPage({ params }: JournalPageProps) {
     notFound()
   }
 
+  // Fetch all journal entries for related content
+  const allJournals = await client.fetch<JournalsQueryResult>(journalsQuery)
+
   // Calculate progress bar
   const progressBar = journal.stats?.goalProgress
     ? '█'.repeat(Math.floor(journal.stats.goalProgress / 10)) +
@@ -50,8 +56,16 @@ export default async function JournalEntryPage({ params }: JournalPageProps) {
   return (
     <Container className="py-12">
       <article className="max-w-3xl mx-auto">
+        {/* Breadcrumb */}
+        <Breadcrumb
+          items={[
+            { label: 'Journal', href: '/journal' },
+            { label: journal.title || 'Journal Entry' },
+          ]}
+        />
+
         {/* Header */}
-        <header className="mb-8">
+        <header className="mb-8 mt-12">
           {journal.dayNumber && (
             <div className="text-sm text-brand-text-secondary mb-2">
               Day {journal.dayNumber}
@@ -131,6 +145,28 @@ export default async function JournalEntryPage({ params }: JournalPageProps) {
             </ul>
           </div>
         )}
+
+        {/* Bottom Navigation */}
+        <div className="mt-12 pt-8 border-t border-gray-200">
+          <BackLink href="/journal" label="Back to Journal" />
+        </div>
+
+        {/* Related Journal Entries */}
+        <RelatedContent
+          currentSlug={journal.slug?.current || ''}
+          currentTags={journal.tags || []}
+          allItems={allJournals
+            .filter(j => j.slug?.current && j.title && j.date)
+            .map((j) => ({
+              slug: j.slug!.current!,
+              title: j.title!,
+              description: j.excerpt || undefined,
+              date: j.date!,
+              tags: j.tags || [],
+            }))}
+          sectionName="Journal Entries"
+          sectionHref="/journal"
+        />
       </article>
     </Container>
   )

@@ -18,10 +18,9 @@ export default async function EssaysPage() {
     <Container className="py-12">
       <div className="max-w-4xl mx-auto">
         <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-4">Essays</h1>
+          <h1 className="text-4xl font-bold mb-4">Essays and deep-dives</h1>
           <p className="text-lg text-gray-600 dark:text-gray-400">
-            Long-form thoughts on technology, startups, philosophy, and the human experience
-            in the digital age.
+            Longer breakdowns - book notes, expert interviews, and field-tested SaaS marketing frameworks
           </p>
         </div>
 
@@ -31,29 +30,44 @@ export default async function EssaysPage() {
             key={essay.slug?.current}
             className="mb-12 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg border border-blue-200 dark:border-blue-800"
           >
-            <div className="mb-2 text-sm font-medium text-blue-600">Featured Essay</div>
+            <div className="mb-3 text-sm font-medium text-blue-600">Featured Essay</div>
             <Link href={`/essays/${essay.slug?.current}`} className="group">
-              <h2 className="text-3xl font-bold mb-3 group-hover:text-blue-600 transition-colors">
-                {essay.title}
-              </h2>
-              <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
-                {essay.date && (
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    {format(new Date(essay.date), 'MMMM d, yyyy')}
-                  </span>
+              <div className="flex gap-4">
+                {essay.coverImage && (
+                  <div className="flex-shrink-0">
+                    <Image
+                      src={urlFor(essay.coverImage).width(160).height(180).url()}
+                      alt={essay.coverImage.alt || essay.title || 'Essay cover'}
+                      width={160}
+                      height={180}
+                      className="rounded-lg border border-blue-300 dark:border-blue-700 object-cover"
+                    />
+                  </div>
                 )}
-                {essay.author && (
-                  <span className="text-gray-600 dark:text-gray-400">
-                    by {essay.author}
-                  </span>
-                )}
+                <div className="flex-1">
+                  <h2 className="text-3xl font-bold mb-3 group-hover:text-blue-600 transition-colors">
+                    {essay.title}
+                  </h2>
+                  <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
+                    {essay.date && (
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        {format(new Date(essay.date), 'MMMM d, yyyy')}
+                      </span>
+                    )}
+                    {essay.author && (
+                      <span className="text-gray-600 dark:text-gray-400">
+                        by {essay.author}
+                      </span>
+                    )}
+                  </div>
+                  {essay.excerpt && (
+                    <p className="text-gray-700 dark:text-gray-300">
+                      {essay.excerpt}
+                    </p>
+                  )}
+                </div>
               </div>
-              {essay.excerpt && (
-                <p className="text-gray-700 dark:text-gray-300">
-                  {essay.excerpt}
-                </p>
-              )}
             </Link>
           </div>
         ))}

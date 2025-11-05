@@ -22,9 +22,11 @@ export const journalBySlugQuery = groq`
     slug,
     date,
     cadence,
+    dayNumber,
     tags,
     excerpt,
     body,
+    stats,
     publishedAt,
     seoDescription,
     "author": author->{

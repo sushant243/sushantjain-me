@@ -2,9 +2,12 @@ import { notFound } from 'next/navigation'
 import { format } from 'date-fns'
 import { Calendar, Music } from 'lucide-react'
 import Container from '@/components/Container'
+import Breadcrumb from '@/components/Breadcrumb'
+import BackLink from '@/components/BackLink'
+import RelatedContent from '@/components/RelatedContent'
 import { client } from '@/lib/sanity.client'
-import { poemBySlugQuery } from '@/lib/sanity.queries'
-import type { PoemBySlugQueryResult } from '@/lib/sanity.types'
+import { poemBySlugQuery, poemsQuery } from '@/lib/sanity.queries'
+import type { PoemBySlugQueryResult, Poem } from '@/lib/sanity.types'
 import type { Metadata } from 'next'
 import PoemContent from './PoemContent'
 
@@ -41,6 +44,9 @@ export default async function PoemPage({ params }: PoemPageProps) {
     notFound()
   }
 
+  // Fetch all poems for related content
+  const allPoems = await client.fetch<Poem[]>(poemsQuery)
+
   const languageLabels: Record<string, string> = {
     hi: 'हिंदी',
     ur: 'اردو',
@@ -56,8 +62,16 @@ export default async function PoemPage({ params }: PoemPageProps) {
   return (
     <Container className="py-12">
       <article className="max-w-3xl mx-auto">
+        {/* Breadcrumb */}
+        <Breadcrumb
+          items={[
+            { label: 'Poetry', href: '/poetry' },
+            { label: poem.title || 'Poem' },
+          ]}
+        />
+
         {/* Header */}
-        <header className="mb-8">
+        <header className="mb-8 mt-12">
           <div className="flex items-center gap-2 mb-4">
             {poem.language && (
               <span className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">
@@ -121,6 +135,28 @@ export default async function PoemPage({ params }: PoemPageProps) {
           body={poem.body}
           transliteration={poem.transliteration}
           translation={poem.translation}
+        />
+
+        {/* Bottom Navigation */}
+        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+          <BackLink href="/poetry" label="Back to Poetry" />
+        </div>
+
+        {/* Related Poems */}
+        <RelatedContent
+          currentSlug={poem.slug?.current || ''}
+          currentTags={poem.tags || []}
+          allItems={allPoems
+            .filter(p => p.slug?.current && p.title && p.date)
+            .map((p) => ({
+              slug: p.slug!.current!,
+              title: p.title!,
+              description: undefined,
+              date: p.date!,
+              tags: p.tags || [],
+            }))}
+          sectionName="Poems"
+          sectionHref="/poetry"
         />
       </article>
     </Container>

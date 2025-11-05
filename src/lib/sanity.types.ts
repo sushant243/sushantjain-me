@@ -390,16 +390,28 @@ export type JournalsQueryResult = Array<{
   author: string | null;
 }>;
 // Variable: journalBySlugQuery
-// Query: *[_type == "journal" && slug.current == $slug][0] {    _id,    title,    slug,    date,    cadence,    tags,    excerpt,    body,    publishedAt,    seoDescription,    "author": author->{      name,      image,      bio    }  }
+// Query: *[_type == "journal" && slug.current == $slug][0] {    _id,    title,    slug,    date,    cadence,    dayNumber,    tags,    excerpt,    body,    stats,    publishedAt,    seoDescription,    "author": author->{      name,      image,      bio    }  }
 export type JournalBySlugQueryResult = {
   _id: string;
   title: string | null;
   slug: Slug | null;
   date: string | null;
   cadence: "daily" | "monthly" | "weekly" | null;
+  dayNumber: number | null;
   tags: Array<string> | null;
   excerpt: string | null;
   body: BlockContent | null;
+  stats: {
+    marketing?: number;
+    building?: number;
+    conversationsTotal?: number;
+    conversationsQualified?: number;
+    conversationsGhost?: number;
+    conversationsWrongFit?: number;
+    goalProgress?: number;
+    runwayCurrent?: number;
+    runwayTotal?: number;
+  } | null;
   publishedAt: string | null;
   seoDescription: string | null;
   author: {
@@ -760,7 +772,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "\n  *[_type == \"journal\" && defined(publishedAt)] | order(date desc) {\n    _id,\n    title,\n    slug,\n    date,\n    cadence,\n    tags,\n    excerpt,\n    publishedAt,\n    \"author\": author->name\n  }\n": JournalsQueryResult;
-    "\n  *[_type == \"journal\" && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    date,\n    cadence,\n    tags,\n    excerpt,\n    body,\n    publishedAt,\n    seoDescription,\n    \"author\": author->{\n      name,\n      image,\n      bio\n    }\n  }\n": JournalBySlugQueryResult;
+    "\n  *[_type == \"journal\" && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    date,\n    cadence,\n    dayNumber,\n    tags,\n    excerpt,\n    body,\n    stats,\n    publishedAt,\n    seoDescription,\n    \"author\": author->{\n      name,\n      image,\n      bio\n    }\n  }\n": JournalBySlugQueryResult;
     "\n  *[_type == \"essay\" && defined(publishedAt)] | order(date desc) {\n    _id,\n    title,\n    slug,\n    date,\n    tags,\n    excerpt,\n    coverImage,\n    publishedAt,\n    \"author\": author->name\n  }\n": EssaysQueryResult;
     "\n  *[_type == \"essay\" && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    date,\n    tags,\n    excerpt,\n    coverImage,\n    body,\n    publishedAt,\n    seoDescription,\n    \"author\": author->{\n      name,\n      image,\n      bio\n    }\n  }\n": EssayBySlugQueryResult;
     "\n  *[_type == \"poem\" && defined(publishedAt)] | order(date desc) {\n    _id,\n    title,\n    slug,\n    date,\n    form,\n    language,\n    tags,\n    \"audioFile\": audioFile.asset->url,\n    publishedAt,\n    \"author\": author->name\n  }\n": PoemsQueryResult;
